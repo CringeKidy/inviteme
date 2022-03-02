@@ -1,10 +1,22 @@
-const { Client, Intents, MessageManager, DiscordAPIError } = require("discord.js")
-const bot = new Client ({ 
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
-    partials: ['MESSAGE', 'CHANNEL', 'REACTION']
-});
-
+const fs = require("node:fs")
+const { Client, Collection, Intents } = require('discord.js');
+const { name } = require("./commands/command");
+const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 require("dotenv").config();
+
+var prefix = "!"
+bot.command = new Collection;
+
+const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"))
+
+
+for (file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	bot.command.set(command.name, command);
+}
+
 
 bot.on("ready", () => {
     console.log("bot is ready")
@@ -28,18 +40,6 @@ bot.on("messageCreate", (message) =>{
     }
 
 
-    if(message.content == "tell me a joke"){
-        const jokes = ["if my dog had your face id shave its ass and teach it how to walk backwards",
-                       "id bang your mum but even your father ran away from that", 
-                       "your pp is smol",
-                       "id hate you but my mother told me not to get mad at jokes",
-                       "i once saw 2 jews walk into a german bar and iv never seen someone so concentrated when drunk",
-                       "your black"
-        ]
-        const response = jokes[Math.floor(Math.random() * jokes.length)]
-        message.channel.send(response)
-    }
-
     if(message.content == "give me a number"){
         const number = Math.floor(Math.random() * 20);
 
@@ -47,6 +47,19 @@ bot.on("messageCreate", (message) =>{
     }
 
     
+    if(message.content.startsWith(prefix.length) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).trim().split(/ +/)
+	const command = args.shift()
+
+	try{
+		bot.command.get(command).execute(message, args, bot);
+	}
+	catch{
+		console.log("test")
+		message.channel.send("That is not a command please check it and try again")
+	}
+
 }) 
 
 bot.on('messageReactionAdd', (react, user) => {
