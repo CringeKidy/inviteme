@@ -4,11 +4,12 @@ const { name } = require("./commands/command");
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 require("dotenv").config();
 
-var prefix = "!"
 bot.command = new Collection;
+bot.prefix = new Collection;
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"))
 
+//for(server in bot.guilds)
 
 for (file of commandFiles) {
 	const command = require(`./commands/${file}`);
@@ -24,12 +25,8 @@ bot.on("ready", () => {
 })
 
 bot.on("messageCreate", (message) =>{
-    if(message.author.bot) return;
-
-   
-    if(message.content == "inviteCringe"){
-        message.channel.send("zaydoggs invited cringe to server")
-    }
+    if(message.content.startsWith(bot.prefix.length) || message.author.bot) return;
+    let guild = bot.guilds.cache.get(message.guild.id);
 
     if(message.content == "i love Elden Ring"){
         message.channel.send("what an emo slut")
@@ -47,16 +44,19 @@ bot.on("messageCreate", (message) =>{
     }
 
     
-    if(message.content.startsWith(prefix.length) || message.author.bot) return;
+    if(!bot.prefix.get(guild)){
+        bot.prefix.set(guild, "!")
+    }
+
+    let prefix = bot.prefix.get(guild)
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/)
-	const command = args.shift()
+	const command = args.shift().toLowerCase();
 
 	try{
-		bot.command.get(command).execute(message, args, bot);
+		bot.command.get(command).execute(message, args, bot, command);
 	}
 	catch{
-		console.log("test")
 		message.channel.send("That is not a command please check it and try again")
 	}
 
