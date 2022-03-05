@@ -1,15 +1,12 @@
+require("dotenv").config();
 const fs = require("node:fs")
 const { Client, Collection, Intents } = require('discord.js');
-const { name } = require("./commands/command");
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-require("dotenv").config();
 
 bot.command = new Collection;
 bot.prefix = new Collection;
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"))
-
-//for(server in bot.guilds)
 
 for (file of commandFiles) {
 	const command = require(`./commands/${file}`);
@@ -21,28 +18,13 @@ for (file of commandFiles) {
 
 bot.on("ready", () => {
     console.log("bot is ready")
-
 })
 
-bot.on("messageCreate", (message) =>{
-    if(message.content.startsWith(bot.prefix.length) || message.author.bot) return;
+bot.on("messageCreate", async (message) =>{
+    if(message.content.startsWith(bot.prefix.length)) return;
+    if(message.author.bot) return;
+
     let guild = bot.guilds.cache.get(message.guild.id);
-
-    if(message.content == "i love Elden Ring"){
-        message.channel.send("what an emo slut")
-    }
-
-    if(message.content == "yow momma so fat"){
-        message.channel.send("when she mad an order with dominos for a delivery they had to call pizza hut in for back up")
-    }
-
-
-    if(message.content == "give me a number"){
-        const number = Math.floor(Math.random() * 20);
-
-       message.channel.send(number.toString())
-    }
-
     
     if(!bot.prefix.get(guild)){
         bot.prefix.set(guild, "!")
@@ -51,14 +33,17 @@ bot.on("messageCreate", (message) =>{
     let prefix = bot.prefix.get(guild)
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/)
-	const command = args.shift().toLowerCase();
+	const command = args.slice(" ")
 
-	try{
-		bot.command.get(command).execute(message, args, bot, command);
-	}
-	catch{
-		message.channel.send("That is not a command please check it and try again")
-	}
+    if(!bot.command.get(command[0])) return;   
+
+    try{
+        await bot.command.get(command[0]).execute(message, args, bot);
+    }
+    catch(error){
+        console.error(error)
+        await message.reply({content:"That is not a command please check it and try again"})
+    }
 
 }) 
 

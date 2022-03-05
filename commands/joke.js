@@ -1,5 +1,7 @@
 module.exports = {
 	name: 'joke',
+        data: 'tells adult jokes',
+        format: '!joke',
         execute(message, args, bot) {
                 const jokes = ["if my dog had your face id shave its ass and teach it how to walk backwards",
                 "id bang your mum but even your father ran away from that", 
@@ -38,7 +40,8 @@ module.exports = {
                 "Why do French people eat snails? They don't like fast food!",
                 "You know why you never see elephants hiding up in trees? Because they’re really good at it.",
                 "Why did the tomato blush? Because it saw the salad dressing.",
-                "A man is walking in the desert with his horse and his dog when the dog says, “I can’t do this. I need water.” The man says, “I didn’t know dogs could talk.”"
+                "A man is walking in the desert with his horse and his dog when the dog says, “I can’t do this. I need water.” The man says, “I didn’t know dogs could talk.”",
+                "someone is being a sussy baka"
 
                 ]
 
