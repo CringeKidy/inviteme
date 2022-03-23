@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'joke',
         data: 'tells adult jokes',
-        format: '!joke',
+        format: 'prefixjoke',
         execute(message, args, bot) {
                 const jokes = ["if my dog had your face id shave its ass and teach it how to walk backwards",
                 "id bang your mum but even your father ran away from that", 
@@ -41,7 +41,22 @@ module.exports = {
                 "You know why you never see elephants hiding up in trees? Because they’re really good at it.",
                 "Why did the tomato blush? Because it saw the salad dressing.",
                 "A man is walking in the desert with his horse and his dog when the dog says, “I can’t do this. I need water.” The man says, “I didn’t know dogs could talk.”",
-                "someone is being a sussy baka"
+                "someone is being a sussy baka",
+                "i invented a new work, plagiarism.",
+                "Yesterday I saw a guy spill all his Scrabble letters on the road. I asked him, “What’s the word on the street?",
+                "Knock! Knock!  Whos there? Control freak. con... Okay now you say control freak who?",
+                "hear about a resturant called karma? There's no menu: you get what you deserve.",
+                "A woman in labor suddenly shouted, Shouldn’t! Wouldn’t! Couldn’t! Didn’t! Can’t!. Dont worry, said the doc. Those are just contractions.",
+                "A bear walks into a bar and says, “Give me a whiskey and … cola.” Why the big pause?” asks the bartender. The bear shrugged. “I’m not sure; I was born with them.",
+                "Did you hear about the actor who fell through the floorboards? He was just going through a stage.",
+                "Did you hear about the claustrophobic astronaut? He just needed a little space.",
+                "Why don’t scientists trust atoms? Because they make up everything.",
+                "Where are average things manufactured? The satisfactory.",
+                "How do you drown a hipster? Throw him in the mainstream.",
+                "How does Moses make tea? He brews it.",
+                "What do you call a parade of rabbits hopping backwards? A receding hare-line.",
+                "What did the Buddhist say to the hot dog vendor? Make me one with everything.",
+                "What did the left eye say to the right eye? Between you and me, something smells."
 
                 ]
 

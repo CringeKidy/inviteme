@@ -1,7 +1,7 @@
 require("dotenv").config();
 const fs = require("node:fs")
 const { Client, Collection, Intents } = require('discord.js');
-const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES,] });
 
 bot.command = new Collection;
 bot.prefix = new Collection;
