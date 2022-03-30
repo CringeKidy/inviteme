@@ -1,7 +1,7 @@
 module.exports = {
-	    name: 'insult me',
-        data: 'tells insulting jokes',
-        format: 'prefixinsults',
+	name: "insult me",
+        data: "tells insulting jokes",
+        format: "prefixinsults",
         execute(message, args, bot) {
                 const insults = ["your ao ugly santa goes ho ho holy shit",
                 "your so ugly even scooby doo cant solve the mystery.",
