@@ -1,9 +1,9 @@
 # Welcome to the InviteMe project
 
 InviteMe is a discord bot that tracks invites as well as doing basic administration things like: 
-- [x] Kicks
-- [x] Bans
-- [x] Mutes
+    ✅ Kicks
+    ✅ Bans
+    ✅ Mutes
 
 ###### *more to come*
 
@@ -27,3 +27,5 @@ CringeKidy:
 - [Twtich](https://www.twitch.tv/cringekidy)
 - [Instagram](https://www.instagram.com/cringekidey/?hl=en)
 - [TikTok](https://www.tiktok.com/@cringekidy)
+
+Zaydogs: 
