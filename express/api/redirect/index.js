@@ -38,6 +38,7 @@ app.get('/', async (req, res) => {
             console.log(err)
             res.sendStatus(400)
             console.log('test')
+            console.log('testagian')
         }
     }
 })
