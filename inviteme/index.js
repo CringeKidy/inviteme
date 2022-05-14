@@ -1,7 +1,13 @@
 require("dotenv").config();
+require('./DB/mongo').execute();
+
 const fs = require("node:fs")
 const { Client, Collection, Intents } = require('discord.js');
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES,] });
+
+const mongoose = require('mongoose'); 
+const fetch = require('node-fetch');
+
 
 bot.command = new Collection;
 bot.prefix = new Collection;
@@ -15,6 +21,20 @@ for (file of commandFiles) {
 	bot.command.set(command.name, command);
 }
 
+
+mongoose.connect(process.env.MONGO_URI,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(console.log("connected to DB"))
+
+const test = new mongoose.Schema({
+    name: String
+})
+const push = mongoose.model('test', test )
+
+push.find({name: ""}, (error, data) => {
+    console.log(data)
+})
 
 bot.on("ready", () => {
     console.log("bot is ready")
