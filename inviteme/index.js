@@ -21,6 +21,7 @@ for (file of commandFiles) {
 	bot.command.set(command.name, command);
 }
 
+console.log('test')
 
 mongoose.connect(process.env.MONGO_URI,{
     useNewUrlParser: true,
