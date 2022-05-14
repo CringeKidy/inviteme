@@ -1,9 +1,9 @@
 # Welcome to the InviteMe project
 
 InviteMe is a discord bot that tracks invites as well as doing basic administration things like: 
-    ✅ Kicks
-    ✅ Bans
-    ✅ Mutes
+- ✅ Kicks
+- ✅ Bans
+- ✅ Mutes
 
 ###### *more to come*
 
