@@ -37,8 +37,6 @@ app.get('/', async (req, res) => {
         catch(err){
             console.log(err)
             res.sendStatus(400)
-            console.log('test')
-            console.log('testagian')
         }
     }
 })
