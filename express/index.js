@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+require('./Utls/database/index.js').Connect();
 
 const express = require('express')
 
