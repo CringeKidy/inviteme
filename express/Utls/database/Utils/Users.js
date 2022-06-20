@@ -12,27 +12,31 @@ const UserModel = mongoose.model('Users',UserSchema)
 
 
 module.exports = {
-    NewUser(UserID, AccessToken, RefreshToken){
-        const User = new UserModel({UserID, AccessToken, RefreshToken})
+    async User(UserID, AccessToken, RefreshToken){
+        const result = await UserModel.findOne({UserID}).select("UserID").lean();
+        if (result) {
+            console.log("Yes sir shes in there")
+        }
+        else{
+            console.log('no sir', result)
+            const User = new UserModel({UserID, AccessToken, RefreshToken})
 
-        try{
-            User.save();
-        }catch{
-            console.log('no it didnt work sussy')
+            try{
+                User.save();
+            }catch{
+                console.log('no it didnt work sussy')
+            }
         }
     },
     async UpdateUser(UserID, AccessToken, RefreshToken){
        
-        if(UserModel.find(UserID)){
-            await UserModel.updateOne({UserID},{
-                AccessToken,
-                RefreshToken
-            })    
-            return ;
+        const result = await UserModel.findOne({UserID}).select("UserID").lean();
+        if (result) {
+            console.log("Yes sir shes in there")
         }
-
-        if(!UserModel.find(UserID)){
-            this.NewUser(UserID, AccessToken, RefreshToken)  
-        }
+        
+        console.log('no sir', result)
+        User(UserID, AccessToken, RefreshToken) 
+        
     }
 }
